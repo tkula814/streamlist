@@ -127,3 +127,149 @@ body {
     gap: 12px;
   }
 }
+.list-section {
+  margin-top: 32px;
+}
+
+.list-section h2 {
+  color: #facc15;
+  margin-bottom: 16px;
+}
+
+.empty-message {
+  color: #d1d5db;
+  font-style: italic;
+}
+
+.stream-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stream-item {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.stream-item.completed {
+  opacity: 0.7;
+  border-color: #22c55e;
+}
+
+.stream-item.completed .item-title {
+  text-decoration: line-through;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.item-category {
+  color: #facc15;
+  font-size: 0.9rem;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.item-actions button,
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.complete-btn {
+  background: #16a34a;
+}
+
+.complete-btn:hover {
+  background: #15803d;
+}
+
+.edit-btn {
+  background: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+.save-btn {
+  background: #7c3aed;
+}
+
+.save-btn:hover {
+  background: #6d28d9;
+}
+
+.edit-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.edit-area input,
+.edit-area select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.stream-form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (max-width: 700px) {
+  .stream-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-actions {
+    width: 100%;
+  }
+
+  .item-actions button {
+    flex: 1;
+    justify-content: center;
+  }
+}
