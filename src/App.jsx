@@ -1,25 +1,42 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import MovieSearch from "./pages/MovieSearch";
-import SavedEvents from "./pages/SavedEvents";
+import Cart from "./pages/Cart";
+import About from "./pages/About";
+import "./App.css";
 
 function App() {
   return (
-    <>
+    <div className="app">
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/events">Saved Events</Link>
-        <Link to="/movies">Movie Search</Link>
+        <div className="logo">🎬 StreamList</div>
+
+        <ul className="nav-links">
+          <li>
+            <Link to="/">StreamList</Link>
+          </li>
+          <li>
+            <Link to="/movies">Movies</Link>
+          </li>
+          <li>
+            <Link to="/cart">Cart</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<SavedEvents />} />
-        <Route path="/movies" element={<MovieSearch />} />
-      </Routes>
-    </>
+      <main className="page-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<MovieSearch />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
 export default App;
-

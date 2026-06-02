@@ -1,94 +1,117 @@
 import { useState } from "react";
+import { Search, Star } from "lucide-react";
 
-function MovieSearch() {
+function Movies() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState("");
-
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
+  const [message, setMessage] = useState("Search for a movie to see TMDB results.");
 
   const searchMovies = async (event) => {
     event.preventDefault();
 
     if (!searchTerm.trim()) {
-      setError("Please enter a movie title.");
+      setMessage("Please enter a movie title.");
       return;
     }
 
-    if (!apiKey) {
-      setError("TMDB API key is missing. Check your .env file.");
+    const token = import.meta.env.VITE_TMDB_TOKEN;
+
+    if (!token) {
+      setMessage("TMDB token is missing. Check your .env file.");
       return;
     }
 
     try {
-      setError("");
+      setMessage("Searching TMDB...");
 
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
+        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
           searchTerm
-        )}`
+        )}&include_adult=false&language=en-US&page=1`,
+        {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (!response.ok) {
-        throw new Error("Unable to retrieve movie data.");
+        throw new Error("Unable to retrieve movie data from TMDB.");
       }
 
       const data = await response.json();
       setMovies(data.results || []);
-    } catch (err) {
-      setError("There was a problem connecting to the TMDB API.");
-      setMovies([]);
+
+      if (!data.results || data.results.length === 0) {
+        setMessage("No movies found. Try another search.");
+      } else {
+        setMessage(`Showing results for "${searchTerm}".`);
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("There was a problem connecting to TMDB.");
     }
   };
 
   return (
-    <main className="page movie-page">
+    <section className="content-card movie-page">
       <h1>Movie Search</h1>
-      <p>Search for movie information using the TMDB API.</p>
+      <p>
+        Search the TMDB database to review movie titles, release dates, ratings,
+        and descriptions.
+      </p>
 
-      <form className="movie-form" onSubmit={searchMovies}>
+      <form onSubmit={searchMovies} className="movie-search-form">
         <input
           type="text"
-          placeholder="Enter a movie title"
+          placeholder="Search movies..."
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />
-        <button type="submit">Search</button>
+
+        <button type="submit">
+          <Search size={18} />
+          Search
+        </button>
       </form>
 
-      {error && <p className="error-message">{error}</p>}
+      <p className="movie-message">{message}</p>
 
-      <section className="movie-results">
+      <div className="movie-grid">
         {movies.map((movie) => (
-          <article className="movie-card" key={movie.id}>
+          <article key={movie.id} className="movie-card">
             {movie.poster_path ? (
               <img
-                src={`${imageBaseUrl}${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
                 alt={movie.title}
               />
             ) : (
-              <div className="no-poster">No Poster Available</div>
+              <div className="poster-placeholder">No Image</div>
             )}
 
-            <h2>{movie.title}</h2>
+            <div className="movie-card-body">
+              <h2>{movie.title}</h2>
 
-            <p>
-              <strong>Release Date:</strong>{" "}
-              {movie.release_date || "Not available"}
-            </p>
+              <p className="movie-meta">
+                {movie.release_date ? movie.release_date.slice(0, 4) : "N/A"}
+                {" | "}
+                <Star size={14} />
+                {movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"}
+              </p>
 
-            <p>
-              <strong>Rating:</strong>{" "}
-              {movie.vote_average ? movie.vote_average : "Not rated"}
-            </p>
-
-            <p>{movie.overview || "No overview available."}</p>
+              <p className="movie-overview">
+                {movie.overview
+                  ? movie.overview
+                  : "No description is available for this title."}
+              </p>
+            </div>
           </article>
         ))}
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
 
-export default MovieSearch;
+export default Movies;

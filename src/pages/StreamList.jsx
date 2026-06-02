@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlusCircle, Trash2, Edit, CheckCircle, Save } from "lucide-react";
 
 function StreamList() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Movie");
-  const [streamItems, setStreamItems] = useState([]);
+  const [streamItems, setStreamItems] = useState(() => {
+  const savedItems = localStorage.getItem("streamItems");
+  return savedItems ? JSON.parse(savedItems) : [];
+});
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editCategory, setEditCategory] = useState("Movie");
-
+  useEffect(() => {
+  localStorage.setItem("streamItems", JSON.stringify(streamItems));
+}, [streamItems]);
   const handleSubmit = (event) => {
     event.preventDefault();
 
