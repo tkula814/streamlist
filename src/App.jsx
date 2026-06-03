@@ -9,8 +9,13 @@ import "./App.css";
 
 function App() {
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("streamListCart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem("streamListCart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error("Error loading cart from localStorage:", error);
+      return [];
+    }
   });
 
   const [warning, setWarning] = useState("");
@@ -18,6 +23,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("streamListCart", JSON.stringify(cartItems));
   }, [cartItems]);
+
+  useEffect(() => {
+    if (!warning) return;
+
+    const timer = setTimeout(() => {
+      setWarning("");
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [warning]);
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -82,7 +97,7 @@ function App() {
 
   return (
     <div className="app">
-      <nav className="navbar">
+      <nav className="navbar" aria-label="Main navigation">
         <div className="logo">🎬 StreamList</div>
 
         <ul className="nav-links">

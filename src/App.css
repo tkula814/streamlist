@@ -80,6 +80,8 @@ body {
   color: #e5e7eb;
 }
 
+/* StreamList Form */
+
 .stream-form {
   display: flex;
   flex-direction: column;
@@ -118,6 +120,8 @@ body {
 .stream-form button:hover {
   background: #6d28d9;
 }
+
+/* StreamList Items */
 
 .list-section {
   margin-top: 32px;
@@ -228,6 +232,7 @@ body {
 }
 
 /* Movie Search */
+
 .movie-page {
   max-width: 1100px;
 }
@@ -258,6 +263,10 @@ body {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.movie-search-form button:hover {
+  background: #6d28d9;
 }
 
 .movie-message {
@@ -317,27 +326,8 @@ body {
   line-height: 1.4;
 }
 
-@media (max-width: 700px) {
-  .navbar {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .stream-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .movie-search-form {
-    flex-direction: column;
-  }
 /* Subscriptions Page */
+
 .subscriptions-page {
   max-width: 1100px;
 }
@@ -390,23 +380,34 @@ body {
   font-weight: bold;
 }
 
-.product-card button {
+.product-card .add-cart-btn {
   width: 100%;
   margin-top: 12px;
-  background: #7c3aed;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
+  background-color: #7c3aed !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 18px !important;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   gap: 6px;
 }
 
+.product-card .add-cart-btn:hover {
+  background-color: #6d28d9 !important;
+}
+
+.product-card .add-cart-btn svg {
+  color: #ffffff !important;
+  flex-shrink: 0;
+}
+
 /* Cart Page */
+
 .cart-page {
   max-width: 1000px;
 }
@@ -460,6 +461,19 @@ body {
   color: #ffffff;
 }
 
+.subscription-quantity {
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  border-radius: 8px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.subscription-quantity span {
+  color: #facc15;
+  font-weight: bold;
+}
+
 .item-total {
   color: #facc15;
   font-weight: bold;
@@ -490,27 +504,38 @@ body {
   color: #facc15;
 }
 
-.subscription-quantity {
-  background: rgba(250, 204, 21, 0.15);
-  border: 1px solid rgba(250, 204, 21, 0.4);
-  border-radius: 8px;
-  padding: 10px;
-  justify-content: center;
-}
-
-.subscription-quantity span {
-  color: #facc15;
-  font-weight: bold;
-}
-
 .cart-total {
   font-size: 1.4rem;
   font-weight: bold;
   color: #facc15 !important;
 }
 
+/* Responsive Layout */
+
 @media (max-width: 800px) {
   .cart-item {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .stream-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .movie-search-form {
+    flex-direction: column;
   }
 }

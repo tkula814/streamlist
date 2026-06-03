@@ -6,12 +6,17 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
     0
   );
 
+  const totalItems = cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
   return (
     <section className="content-card cart-page">
       <h1>Your Cart</h1>
       <p>
         Review selected subscriptions and accessories. You can adjust quantities
-        or remove items before checkout.
+        for accessories or remove items before checkout.
       </p>
 
       {cartItems.length === 0 ? (
@@ -28,22 +33,30 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
                 </div>
 
                 {item.type === "subscription" ? (
-  <div className="quantity-controls subscription-quantity">
-    <span>Plan Selected</span>
-  </div>
-) : (
-  <div className="quantity-controls">
-    <button type="button" onClick={() => decreaseQuantity(item.id)}>
-      <Minus size={16} />
-    </button>
+                  <div className="quantity-controls subscription-quantity">
+                    <span>Plan Selected</span>
+                  </div>
+                ) : (
+                  <div className="quantity-controls">
+                    <button
+                      type="button"
+                      onClick={() => decreaseQuantity(item.id)}
+                      aria-label={`Decrease quantity of ${item.name}`}
+                    >
+                      <Minus size={16} />
+                    </button>
 
-    <span>{item.quantity}</span>
+                    <span>{item.quantity}</span>
 
-    <button type="button" onClick={() => increaseQuantity(item.id)}>
-      <Plus size={16} />
-    </button>
-  </div>
-)}
+                    <button
+                      type="button"
+                      onClick={() => increaseQuantity(item.id)}
+                      aria-label={`Increase quantity of ${item.name}`}
+                    >
+                      <Plus size={16} />
+                    </button>
+                  </div>
+                )}
 
                 <p className="item-total">
                   ${(item.price * item.quantity).toFixed(2)}
@@ -53,6 +66,7 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
                   type="button"
                   className="remove-btn"
                   onClick={() => removeFromCart(item.id)}
+                  aria-label={`Remove ${item.name} from cart`}
                 >
                   <Trash2 size={16} />
                   Remove
@@ -63,7 +77,7 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
 
           <div className="cart-summary">
             <h2>Cart Summary</h2>
-            <p>Total Items: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}</p>
+            <p>Total Items: {totalItems}</p>
             <p className="cart-total">Total: ${totalPrice.toFixed(2)}</p>
           </div>
         </>

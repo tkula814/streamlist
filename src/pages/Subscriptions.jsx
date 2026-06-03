@@ -24,7 +24,11 @@ function Subscriptions({ addToCart, warning }) {
             <p>{product.description}</p>
             <p className="product-price">${product.price.toFixed(2)}</p>
 
-            <button type="button" onClick={() => addToCart(product)}>
+            <button
+              type="button"
+              className="add-cart-btn"
+              onClick={() => addToCart(product)}
+            >
               <ShoppingCart size={18} />
               Add to Cart
             </button>
