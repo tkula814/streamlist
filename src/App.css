@@ -539,3 +539,123 @@ body {
     flex-direction: column;
   }
 }
+
+.login-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #312e81, #111827 55%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-card {
+  max-width: 480px;
+  width: 100%;
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.login-card h1 {
+  color: #f9fafb;
+  margin-bottom: 1rem;
+}
+
+.login-card p {
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+}
+
+.login-note {
+  font-size: 0.9rem;
+  color: #a5b4fc;
+  margin-top: 1.5rem;
+}
+
+.logout-btn {
+  border: none;
+  border-radius: 999px;
+  background: #ef4444;
+  color: white;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.credit-card-page {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.security-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fde68a;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.credit-card-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.credit-card-form label {
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.credit-card-form input {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 10px;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 1rem;
+}
+
+.credit-card-form input:focus {
+  outline: 2px solid #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+.checkout-btn {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: white;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.checkout-btn:hover {
+  background: #6d28d9;
+}
+
+.saved-card-section {
+  margin-top: 2rem;
+}
+
+.saved-card {
+  background: rgba(31, 41, 55, 0.95);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1rem;
+}

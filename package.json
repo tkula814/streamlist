@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.13.5",
     "@vitejs/plugin-react": "latest",
     "lucide-react": "^1.16.0",
     "react": "18.2.0",

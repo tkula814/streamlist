@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Trash2, Plus, Minus } from "lucide-react";
 
 function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity }) {
@@ -6,10 +7,7 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
     0
   );
 
-  const totalItems = cartItems.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <section className="content-card cart-page">
@@ -79,6 +77,10 @@ function Cart({ cartItems, removeFromCart, increaseQuantity, decreaseQuantity })
             <h2>Cart Summary</h2>
             <p>Total Items: {totalItems}</p>
             <p className="cart-total">Total: ${totalPrice.toFixed(2)}</p>
+
+            <Link to="/credit-card" className="checkout-btn">
+              Proceed to Checkout
+            </Link>
           </div>
         </>
       )}
